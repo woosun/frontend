@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: prod
+  name: web-deploy
+spec:
+  selector:
+    matchLabels:
+      servertype: web-cpu
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        servertype: web-cpu
+    spec:
+      containers:
+      - name: web
+        image: yoskr/nginx:latest
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 200m
+        envFrom:
+        - configMapRef:
+            name: cm-httpd  #cm-httpd 설정파일을 불러오자
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: web-pvc-pv
+      volumes:
+      - name : web-pvc-pv
+        persistentVolumeClaim:
+          claimName: pvc-web
