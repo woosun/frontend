@@ -9,7 +9,7 @@ spec:
       servertype: web-cpu
       type: web
       app: frontend
-      varsion: latest
+      varsion: web_latest
   replicas: 2
   template:
     metadata:
@@ -17,7 +17,7 @@ spec:
         servertype: web-cpu
         type: web
         app: frontend
-        varsion: latest
+        varsion: web_latest
     spec:
       containers:
       - name: web
