@@ -7,11 +7,15 @@ spec:
   selector:
     matchLabels:
       servertype: web-cpu
+      type: web
+      app: frontend
   replicas: 2
   template:
     metadata:
       labels:
         servertype: web-cpu
+        type: web
+        app: frontend
     spec:
       containers:
       - name: web
